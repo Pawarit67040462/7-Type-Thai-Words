@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ลูเล็ตสุ่มชนิดของคำไทย 7 ชนิด</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Mali & Kanit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Mali:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            kanit: ['Kanit', 'sans-serif'],
+            mali: ['Mali', 'cursive'],
+          },
+          boxShadow: {
+            'cartoon': '0 8px 0 0 rgba(0,0,0,0.25)',
+            'cartoon-sm': '0 4px 0 0 rgba(0,0,0,0.2)',
+            'cartoon-lg': '0 12px 0 0 rgba(0,0,0,0.3)',
+            'inner-glow': 'inset 0 0 20px rgba(255, 255, 255, 0.7)',
+          },
+          animation: {
+            'bounce-gentle': 'bounceGentle 2s infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 4s ease-in-out infinite',
+            'sparkle': 'sparkle 1.5s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            bounceGentle: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(3deg)' },
+            },
+            sparkle: {
+              '0%': { transform: 'scale(0.8) opacity(0.7)' },
+              '100%': { transform: 'scale(1.2) opacity(1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Mali', 'Kanit', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    /* CS:GO Roulette Viewport styling */
+    .roulette-viewport {
+      perspective: 1000px;
+      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
+
+    .roulette-track {
+      will-change: transform;
+    }
+
+    /* Word card 3D effect */
+    .word-card {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transform-style: preserve-3d;
+    }
+
+    /* Custom CSS Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #fb7185;
+      border-radius: 10px;
+    }
+
+    /* Background pattern dots */
+    .bg-dots {
+      background-image: radial-gradient(rgba(244, 114, 182, 0.35) 2.5px, transparent 2.5px);
+      background-size: 28px 28px;
+    }
+
+    /* Confetti Canvas overlay */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-sky-100 to-amber-100 min-h-screen text-slate-800 bg-dots relative overflow-x-hidden flex flex-col justify-between">
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Floating Background Elements -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute top-6 left-6 opacity-60 animate-float" style="animation-delay: 0s;">
+      <svg width="100" height="60" viewBox="0 0 24 24" fill="white"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+    </div>
+    <div class="absolute top-12 right-10 opacity-60 animate-float" style="animation-delay: 1.5s;">
+      <svg width="120" height="70" viewBox="0 0 24 24" fill="white"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+    </div>
+    <div class="absolute bottom-16 left-8 opacity-50 animate-bounce-gentle">
+      <span class="text-6xl">✏️</span>
+    </div>
+    <div class="absolute bottom-20 right-8 opacity-50 animate-float" style="animation-delay: 2s;">
+      <span class="text-6xl">📖</span>
+    </div>
+    <div class="absolute top-1/4 right-1/4 text-amber-400 opacity-80 animate-sparkle text-4xl">⭐</div>
+    <div class="absolute bottom-1/3 left-1/5 text-pink-400 opacity-80 animate-sparkle text-4xl" style="animation-delay: 0.7s;">✨</div>
+    <div class="absolute top-1/3 left-1/3 text-sky-400 opacity-70 animate-sparkle text-3xl" style="animation-delay: 1.2s;">🌟</div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="relative z-10 flex-1 flex flex-col justify-between max-w-5xl mx-auto w-full px-4 py-4 min-h-screen">
+
+    <!-- Navbar / Header -->
+    <header class="flex justify-between items-center bg-white/90 backdrop-blur-md px-6 py-3.5 rounded-3xl border-4 border-white shadow-cartoon mb-3">
+      <div class="flex items-center gap-3">
+        <div class="bg-amber-400 p-2.5 rounded-2xl border-2 border-amber-500 shadow-sm text-3xl flex items-center justify-center">
+          🎡
+        </div>
+        <div>
+          <h1 class="font-kanit font-black text-xl sm:text-2xl text-slate-800 leading-tight drop-shadow-sm">
+            ลูเล็ตสุ่มชนิดของคำไทย 7 ชนิด
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-500 font-bold">สื่อการเรียนรู้ภาษาไทยสำหรับเด็กประถม</p>
+        </div>
+      </div>
+      <button id="btnInfo" onclick="openInfoModal()" class="bg-sky-400 hover:bg-sky-500 text-white font-bold px-4 py-2.5 rounded-2xl border-2 border-sky-600 shadow-cartoon-sm hover:scale-105 transition active:scale-95 flex items-center gap-1.5 text-sm sm:text-base">
+        <span>💡</span> <span class="hidden sm:inline">คู่มือ</span>คำ 7 ชนิด
+      </button>
+    </header>
+
+    <!-- SCREEN 1: WELCOME SCREEN -->
+    <main id="welcomeScreen" class="flex-1 flex flex-col items-center justify-center text-center py-6 my-auto">
+      <div class="bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-3xl border-4 border-amber-300 shadow-cartoon-lg max-w-2xl w-full relative overflow-hidden">
+        
+        <div class="absolute -top-3 -left-3 bg-pink-500 text-white text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full border-2 border-white shadow-md transform -rotate-12">
+          ภาษาไทยสุดสนุก! 🎒
+        </div>
+        <div class="absolute -bottom-3 -right-3 bg-teal-500 text-white text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full border-2 border-white shadow-md transform rotate-6">
+          หมุนไว ได้ความรู้ ✨
+        </div>
+
+        <div class="my-4">
+          <span class="inline-block text-8xl sm:text-9xl animate-bounce-gentle drop-shadow-md">🎰</span>
+        </div>
+
+        <h2 class="font-kanit text-3xl sm:text-4xl font-black text-amber-500 mb-3 drop-shadow-sm">
+          มาหมุนลูเล็ตสุ่มชนิดของคำกัน!
+        </h2>
+        
+        <p class="text-slate-600 text-base sm:text-lg mb-8 max-w-md mx-auto leading-relaxed font-semibold">
+          เรียนรู้และทดสอบ <span class="font-black text-pink-500 underline decoration-wavy underline-offset-4">ชนิดของคำไทยทั้ง 7 ชนิด</span> ด้วยวงล้อลูเล็ตสุ่มคำสไตล์ CS:GO หมุนเร็ว ลื่นไหล อ่านง่ายชัดเจน!
+        </p>
+
+        <!-- Preview of 7 word classes pills -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8 max-w-lg mx-auto">
+          <span class="bg-rose-100 text-rose-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-rose-300">1. คำนาม</span>
+          <span class="bg-amber-100 text-amber-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-amber-300">2. คำสรรพนาม</span>
+          <span class="bg-emerald-100 text-emerald-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-emerald-300">3. คำกริยา</span>
+          <span class="bg-sky-100 text-sky-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-sky-300">4. คำวิเศษณ์</span>
+          <span class="bg-purple-100 text-purple-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-purple-300">5. คำบุพบท</span>
+          <span class="bg-orange-100 text-orange-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-orange-300">6. คำสันธาน</span>
+          <span class="bg-yellow-100 text-yellow-800 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-yellow-400">7. คำอุทาน</span>
+        </div>
+
+        <button id="btnStartGame" onclick="startGame()" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-500 hover:to-teal-500 text-white font-kanit font-black text-2xl sm:text-3xl px-12 py-4 rounded-3xl border-4 border-emerald-600 shadow-cartoon hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-3 mx-auto">
+          <span>🎮</span> เริ่มหมุนสุ่มคำ!
+        </button>
+      </div>
+    </main>
+
+    <!-- SCREEN 2: MAIN GAME SCREEN (Initially Hidden) -->
+    <main id="gameScreen" class="hidden flex-1 flex flex-col justify-center items-center py-2 my-auto w-full">
+      
+      <!-- Status Banner -->
+      <div class="bg-white/90 backdrop-blur-sm px-8 py-3 rounded-2xl border-4 border-amber-300 shadow-cartoon-sm mb-4 text-center">
+        <p id="gameStatusText" class="font-kanit font-extrabold text-slate-800 text-base sm:text-xl">
+          กดปุ่ม <span class="text-amber-500 font-black">"หมุนลูเล็ตสุ่มคำ!"</span> เพื่อเริ่มสุ่มคำทันที
+        </p>
+      </div>
+
+      <!-- CS:GO STYLE ROULETTE CONTAINER -->
+      <div class="relative w-full max-w-4xl bg-slate-900 p-3 sm:p-5 rounded-3xl border-8 border-amber-400 shadow-cartoon-lg overflow-hidden my-2">
+        
+        <!-- Center Gold Pointer Pin (Top Arrow & Glowing Line) -->
+        <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center justify-between">
+          <!-- Top Arrow Pointer -->
+          <div class="w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-t-[28px] border-t-amber-400 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)]"></div>
+          <!-- Center Vertical Glowing Line -->
+          <div class="w-2 h-full bg-amber-400 shadow-[0_0_16px_#f59e0b] opacity-95"></div>
+          <!-- Bottom Arrow Pointer -->
+          <div class="w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-b-[28px] border-b-amber-400 filter drop-shadow-[0_-4px_6px_rgba(0,0,0,0.8)]"></div>
+        </div>
+
+        <!-- Viewport Glass Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/40 z-20 pointer-events-none rounded-2xl"></div>
+
+        <!-- Roulette Viewport Screen (Higher height for max readability) -->
+        <div id="rouletteViewport" class="roulette-viewport w-full h-56 sm:h-64 bg-slate-950 rounded-2xl overflow-hidden relative flex items-center">
+          
+          <!-- Moving Cards Track -->
+          <div id="rouletteTrack" class="roulette-track flex gap-4 px-4 absolute left-0 top-1/2 -translate-y-1/2">
+            <!-- Dynamic Cards inserted via JavaScript -->
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Control Buttons Container -->
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
+        
+        <!-- Back to Welcome Screen Button -->
+        <button onclick="showWelcomeScreen()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-4 rounded-2xl border-2 border-slate-300 shadow-cartoon-sm hover:scale-105 active:scale-95 transition text-base">
+          ⬅️ หน้าหลัก
+        </button>
+
+        <!-- Main Spin Button -->
+        <button id="btnSpin" onclick="startSpin()" class="w-full sm:flex-1 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 hover:from-amber-500 hover:to-orange-500 text-white font-kanit font-black text-2xl py-4 px-8 rounded-2xl border-4 border-amber-600 shadow-cartoon hover:scale-105 active:scale-95 transition-all duration-150 cursor-pointer flex items-center justify-center gap-2">
+          <span>🎰</span> หมุนลูเล็ตสุ่มคำ!
+        </button>
+
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 text-xs text-slate-500 font-semibold">
+      <p>สื่อการเรียนรู้กลุ่มสาระการเรียนรู้ภาษาไทย • ปรับปรุงระบบสุ่มความเร็วสูงและการแสดงผล 100% 🌟</p>
+    </footer>
+
+  </div>
+
+  <!-- MODAL 1: RESULT WINNER MODAL -->
+  <div id="resultModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="resultCard" class="bg-white rounded-3xl border-8 border-amber-300 shadow-cartoon-lg max-w-md w-full p-6 sm:p-7 text-center transform scale-95 transition-transform duration-300 relative overflow-hidden">
+      
+      <!-- Top Winner Badge -->
+      <div class="inline-block bg-amber-400 text-amber-950 font-kanit font-extrabold text-base px-5 py-1.5 rounded-full border-2 border-amber-500 mb-3 shadow-sm">
+        🎉 สุ่มสำเร็จ! ได้คำชนิดนี้
+      </div>
+
+      <!-- Card Icon & Title -->
+      <div id="modalIcon" class="text-7xl my-3 animate-bounce-gentle">✨</div>
+      <h3 id="modalTitle" class="font-kanit text-4xl font-black text-slate-800 mb-1">คำนาม</h3>
+      <p id="modalSubtitle" class="inline-block px-4 py-1 rounded-xl text-base font-black text-white bg-pink-500 mb-4">(เรียกชื่อ)</p>
+
+      <!-- Description Box -->
+      <div class="bg-slate-50 p-4 rounded-2xl border-2 border-slate-200 text-left mb-4">
+        <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider mb-1">ความหมาย:</h4>
+        <p id="modalDesc" class="text-slate-800 text-base leading-relaxed font-bold">
+          คำที่ใช้เรียกชื่อคน สัตว์ สิ่งของ หรือสถานที่
+        </p>
+      </div>
+
+      <!-- Example Words Box -->
+      <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 text-left mb-6">
+        <h4 class="font-bold text-xs text-amber-600 uppercase tracking-wider mb-2">💡 ตัวอย่างคำชนิดนี้:</h4>
+        <div id="modalExamples" class="flex flex-wrap gap-2">
+          <!-- Example Pills Dynamic -->
+        </div>
+      </div>
+
+      <!-- Modal Action Buttons -->
+      <div class="flex gap-3">
+        <button onclick="closeResultModal()" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3.5 px-4 rounded-2xl border-2 border-slate-300 shadow-cartoon-sm text-base active:scale-95 transition">
+          ปิดหน้านี้
+        </button>
+        <button onclick="closeResultModal(); startSpin();" class="flex-1 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-kanit font-extrabold py-3.5 px-4 rounded-2xl border-2 border-emerald-600 shadow-cartoon-sm text-base active:scale-95 transition flex items-center justify-center gap-1.5">
+          <span>🔄</span> สุ่มอีกครั้ง!
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL 2: 7 WORD CLASSES REFERENCE GUIDE -->
+  <div id="infoModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white rounded-3xl border-4 border-sky-300 shadow-cartoon-lg max-w-2xl w-full p-6 text-left relative max-h-[85vh] flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center pb-4 border-b border-slate-200 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-3xl">📚</span>
+          <h3 class="font-kanit font-extrabold text-2xl text-slate-800">สรุปชนิดของคำไทย 7 ชนิด</h3>
+        </div>
+        <button onclick="closeInfoModal()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full font-bold text-lg flex items-center justify-center transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Scrollable List of 7 Classes -->
+      <div id="infoList" class="flex-1 overflow-y-auto space-y-3 pr-2">
+        <!-- Generated by JS -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 mt-2 border-t border-slate-200 text-right">
+        <button onclick="closeInfoModal()" class="bg-sky-400 hover:bg-sky-500 text-white font-bold px-6 py-2.5 rounded-xl border-2 border-sky-600 shadow-cartoon-sm text-base">
+          เข้าใจแล้ว!
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script>
+    /* ==========================================================================
+       DATA STRUCTURE: 7 Word Classes in Thai
+       ========================================================================== */
+    const WORD_CLASSES = [
+      {
+        id: 'noun',
+        title: 'คำนาม',
+        subtitle: 'เรียกชื่อ',
+        desc: 'คำที่ใช้เรียกชื่อ คน สัตว์ สิ่งของ สถานที่ หรือสภาพธรรมชาติต่างๆ',
+        examples: ['คุณครู', 'แมว', 'โรงเรียน', 'หนังสือ', 'ดวงอาทิตย์', 'พัดลม'],
+        bgColor: 'bg-rose-500',
+        borderColor: 'border-rose-600',
+        textColor: 'text-rose-600',
+        lightBg: 'bg-rose-50',
+        badgeBg: 'bg-rose-100 text-rose-800',
+        icon: '✏️'
+      },
+      {
+        id: 'pronoun',
+        title: 'คำสรรพนาม',
+        subtitle: 'ใช้แทน',
+        desc: 'คำที่ใช้แทนคำนาม เพื่อไม่ต้องกล่าวคำนามนั้นซ้ำซาก',
+        examples: ['ฉัน', 'เธอ', 'เขา', 'มัน', 'ท่าน', 'คุณ', 'พวกเรา'],
+        bgColor: 'bg-amber-400',
+        borderColor: 'border-amber-500',
+        textColor: 'text-amber-600',
+        lightBg: 'bg-amber-50',
+        badgeBg: 'bg-amber-100 text-amber-800',
+        icon: '👤'
+      },
+      {
+        id: 'verb',
+        title: 'คำกริยา',
+        subtitle: 'บอกอาการ',
+        desc: 'คำที่แสดงการกระทำ อาการ หรือสภาพของคน สัตว์ สิ่งของ',
+        examples: ['วิ่ง', 'หัวเราะ', 'อ่าน', 'กิน', 'กระโดด', 'นอน', 'เขียน'],
+        bgColor: 'bg-emerald-500',
+        borderColor: 'border-emerald-600',
+        textColor: 'text-emerald-600',
+        lightBg: 'bg-emerald-50',
+        badgeBg: 'bg-emerald-100 text-emerald-800',
+        icon: '🏃'
+      },
+      {
+        id: 'adjective',
+        title: 'คำวิเศษณ์',
+        subtitle: 'ขยายความ',
+        desc: 'คำที่ทำหน้าที่ขยายคำนาม สรรพนาม กริยา หรือวิเศษณ์ ให้ได้ความชัดเจนยิ่งขึ้น',
+        examples: ['หอม', 'สูง', 'กลม', 'เร็ว', 'สวย', 'เค็ม', 'ใหญ่'],
+        bgColor: 'bg-sky-500',
+        borderColor: 'border-sky-600',
+        textColor: 'text-sky-600',
+        lightBg: 'bg-sky-50',
+        badgeBg: 'bg-sky-100 text-sky-800',
+        icon: '⭐'
+      },
+      {
+        id: 'preposition',
+        title: 'คำบุพบท',
+        subtitle: 'บอกสัมพันธ์',
+        desc: 'คำที่ปรากฏหน้าคำนามหรือสรรพนาม เพื่อบอกตำแหน่ง เวลา หรือความเกี่ยวข้อง',
+        examples: ['บน', 'ใน', 'ใต้', 'แก่', 'เพื่อ', 'ใกล้', 'ไกล', 'สำหรับ'],
+        bgColor: 'bg-purple-500',
+        borderColor: 'border-purple-600',
+        textColor: 'text-purple-600',
+        lightBg: 'bg-purple-50',
+        badgeBg: 'bg-purple-100 text-purple-800',
+        icon: '📍'
+      },
+      {
+        id: 'conjunction',
+        title: 'คำสันธาน',
+        subtitle: 'เชื่อมความ',
+        desc: 'คำที่ทำหน้าที่เชื่อมคำ ประโยค หรือข้อความเข้าด้วยกัน',
+        examples: ['และ', 'แต่', 'หรือ', 'เพราะฉะนั้น', 'ถึงแม้ว่า', 'จึง'],
+        bgColor: 'bg-orange-500',
+        borderColor: 'border-orange-600',
+        textColor: 'text-orange-600',
+        lightBg: 'bg-orange-50',
+        badgeBg: 'bg-orange-100 text-orange-800',
+        icon: '🔗'
+      },
+      {
+        id: 'interjection',
+        title: 'คำอุทาน',
+        subtitle: 'แสดงอารมณ์',
+        desc: 'คำที่เปล่งออกมาเพื่อแสดงอารมณ์ความรู้สึกของผู้พูด เช่น ตกใจ ดีใจ สงสาร',
+        examples: ['อุ๊ย!', 'โอ้โห!', 'โธ่!', 'เฮ้อ!', 'ว้า!', 'เย้!'],
+        bgColor: 'bg-yellow-400',
+        borderColor: 'border-yellow-500',
+        textColor: 'text-yellow-700',
+        lightBg: 'bg-yellow-50',
+        badgeBg: 'bg-yellow-100 text-yellow-900',
+        icon: '💥'
+      }
+    ];
+
+    /* ==========================================================================
+       SOUND ENGINE (Web Audio API)
+       ========================================================================== */
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    // Crisp ticking sound when passing center indicator
+    function playTickSound() {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(700, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(180, audioCtx.currentTime + 0.025);
+
+        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.025);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.025);
+      } catch(e) { console.error(e); }
+    }
+
+    // Victory chime tune when spin reaches winner target
+    function playWinSound() {
+      if (!audioCtx) return;
+      try {
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((freq, index) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+
+          const startTime = audioCtx.currentTime + (index * 0.09);
+          gain.gain.setValueAtTime(0.22, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.38);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(startTime);
+          osc.stop(startTime + 0.38);
+        });
+      } catch(e) { console.error(e); }
+    }
+
+    /* ==========================================================================
+       ROULETTE RENDER & UNIFORM SPEED SPIN ENGINE
+       ========================================================================== */
+    let trackItems = [];
+    let isSpinning = false;
+    let currentX = 0;
+    const START_INDEX = 4;        // Baseline start card index
+    const SPIN_DISTANCE_CARDS = 62; // Fixed number of cards to travel (Equal spin speed every time!)
+    const TOTAL_TRACK_CARDS = START_INDEX + SPIN_DISTANCE_CARDS + 10; // Total track size
+
+    // Enhanced Responsive Card Dimensions for 100% visibility
+    function getCardDimensions() {
+      const isMobile = window.innerWidth < 640;
+      const cardWidth = isMobile ? 160 : 205; // Larger card width
+      const cardGap = 16;                     // Gap between cards
+      return { cardWidth, cardGap, step: cardWidth + cardGap };
+    }
+
+    // Build randomized track array with guaranteed winner placed at targetIndex
+    function buildTrackWithWinner(targetIndex, winnerObject) {
+      trackItems = [];
+      for (let i = 0; i < TOTAL_TRACK_CARDS; i++) {
+        if (i === targetIndex && winnerObject) {
+          trackItems.push(winnerObject);
+        } else {
+          const randomIndex = Math.floor(Math.random() * WORD_CLASSES.length);
+          trackItems.push(WORD_CLASSES[randomIndex]);
+        }
+      }
+    }
+
+    // Render enlarged cards into roulette track DOM
+    function renderRouletteTrack() {
+      const trackEl = document.getElementById('rouletteTrack');
+      const { cardWidth } = getCardDimensions();
+      
+      trackEl.innerHTML = trackItems.map((item) => `
+        <div class="word-card flex-shrink-0 bg-white rounded-3xl border-4 ${item.borderColor} shadow-cartoon-sm flex flex-col justify-between p-4 select-none text-center cursor-pointer"
+             style="width: ${cardWidth}px; height: 210px;">
+          <!-- Top Icon -->
+          <div class="text-4xl sm:text-5xl mt-1 drop-shadow-sm">${item.icon}</div>
+          
+          <!-- Middle Title & Subtitle -->
+          <div class="my-auto">
+            <h4 class="font-kanit font-black text-2xl sm:text-3xl text-slate-800 leading-tight whitespace-nowrap tracking-wide">${item.title}</h4>
+            <p class="text-xs sm:text-sm font-extrabold text-slate-500 mt-1">(${item.subtitle})</p>
+          </div>
+          
+          <!-- Bottom Category Tag -->
+          <div class="${item.bgColor} text-white text-xs sm:text-sm font-black py-1.5 px-3 rounded-xl border border-black/10 shadow-sm">
+            คำไทย 7 ชนิด
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Screen navigation
+    function startGame() {
+      initAudio();
+      document.getElementById('welcomeScreen').classList.add('hidden');
+      document.getElementById('gameScreen').classList.remove('hidden');
+      resetTrackToBaseline();
+    }
+
+    function showWelcomeScreen() {
+      if (isSpinning) return;
+      document.getElementById('gameScreen').classList.add('hidden');
+      document.getElementById('welcomeScreen').classList.remove('hidden');
+    }
+
+    // Reset track position back to baseline index instantly (Seamless reset)
+    function resetTrackToBaseline() {
+      const targetWinnerIndex = START_INDEX + SPIN_DISTANCE_CARDS;
+      const initialWinner = WORD_CLASSES[Math.floor(Math.random() * WORD_CLASSES.length)];
+      buildTrackWithWinner(targetWinnerIndex, initialWinner);
+      renderRouletteTrack();
+
+      const viewport = document.getElementById('rouletteViewport');
+      const trackEl = document.getElementById('rouletteTrack');
+      const { step, cardWidth } = getCardDimensions();
+      
+      const viewportWidth = viewport.offsetWidth;
+      // Position START_INDEX card directly in center of viewport
+      currentX = (viewportWidth / 2) - (START_INDEX * step + cardWidth / 2);
+      trackEl.style.transform = `translateX(${currentX}px)`;
+    }
+
+    // Start CS:GO Style Roulette Spin Animation with Equal Initial Speed
+    function startSpin() {
+      if (isSpinning) return;
+      initAudio();
+
+      const spinBtn = document.getElementById('btnSpin');
+      spinBtn.disabled = true;
+      spinBtn.classList.add('opacity-60', 'cursor-not-allowed');
+
+      // 1. Randomly pick winning word class
+      const winningItem = WORD_CLASSES[Math.floor(Math.random() * WORD_CLASSES.length)];
+      const targetWinnerIndex = START_INDEX + SPIN_DISTANCE_CARDS;
+
+      // 2. Rebuild track with winning card placed at targetWinnerIndex
+      buildTrackWithWinner(targetWinnerIndex, winningItem);
+      renderRouletteTrack();
+
+      // 3. Instant seamless position reset to START_INDEX
+      const viewport = document.getElementById('rouletteViewport');
+      const trackEl = document.getElementById('rouletteTrack');
+      const { step, cardWidth } = getCardDimensions();
+      const viewportWidth = viewport.offsetWidth;
+
+      currentX = (viewportWidth / 2) - (START_INDEX * step + cardWidth / 2);
+      trackEl.style.transform = `translateX(${currentX}px)`;
+      
+      // Force browser reflow so transformation applies immediately before spin start
+      void trackEl.offsetWidth;
+
+      isSpinning = true;
+      document.getElementById('gameStatusText').innerHTML = '⏳ กำลังหมุนด้วยความเร็วสูง...';
+
+      // 4. Calculate final target X (with slight random offset inside card width for realism)
+      const randomCardOffset = (Math.random() - 0.5) * (cardWidth * 0.5);
+      const targetX = (viewportWidth / 2) - (targetWinnerIndex * step + cardWidth / 2 + randomCardOffset);
+
+      // Animation parameters (Always constant distance = Equal starting spin speed!)
+      const startX = currentX;
+      const distance = targetX - startX;
+      const duration = 5800; // 5.8 Seconds duration
+      let startTime = null;
+      let lastTickCardIndex = START_INDEX;
+
+      // Quartic easing function for high initial speed and smooth CS:GO deceleration
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function animateSpin(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
+
+        currentX = startX + (distance * easedProgress);
+        trackEl.style.transform = `translateX(${currentX}px)`;
+
+        // Detect each card passing the center indicator line for tick sound
+        const currentCenterCardIndex = Math.floor(((viewportWidth / 2) - currentX) / step);
+
+        if (currentCenterCardIndex !== lastTickCardIndex) {
+          playTickSound();
+          lastTickCardIndex = currentCenterCardIndex;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(animateSpin);
+        } else {
+          // Spin Complete!
+          isSpinning = false;
+          spinBtn.disabled = false;
+          spinBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+          document.getElementById('gameStatusText').innerHTML = `🎉 สุ่มได้: <span class="${winningItem.textColor} font-black text-2xl">${winningItem.title}</span>`;
+          
+          playWinSound();
+          triggerConfetti();
+          openResultModal(winningItem);
+        }
+      }
+
+      requestAnimationFrame(animateSpin);
+    }
+
+    /* ==========================================================================
+       MODALS & DIALOGS LOGIC
+       ========================================================================== */
+    function openResultModal(item) {
+      const modal = document.getElementById('resultModal');
+      const card = document.getElementById('resultCard');
+
+      document.getElementById('modalIcon').innerText = item.icon;
+      document.getElementById('modalTitle').innerText = item.title;
+      document.getElementById('modalSubtitle').innerText = `(${item.subtitle})`;
+      document.getElementById('modalSubtitle').className = `inline-block px-4 py-1 rounded-xl text-base font-black text-white ${item.bgColor} mb-4 shadow-sm`;
+      document.getElementById('modalDesc').innerText = item.desc;
+
+      // Example Word Pills
+      const examplesContainer = document.getElementById('modalExamples');
+      examplesContainer.innerHTML = item.examples.map(ex => `
+        <span class="bg-white px-3.5 py-1.5 rounded-xl border-2 border-amber-300 text-amber-950 font-extrabold text-sm shadow-sm">
+          ${ex}
+        </span>
+      `).join('');
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+
+    function closeResultModal() {
+      const modal = document.getElementById('resultModal');
+      const card = document.getElementById('resultCard');
+
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+    }
+
+    function openInfoModal() {
+      const modal = document.getElementById('infoModal');
+      const listContainer = document.getElementById('infoList');
+
+      listContainer.innerHTML = WORD_CLASSES.map((item, i) => `
+        <div class="p-4 rounded-2xl border-2 ${item.borderColor} ${item.lightBg} flex items-start gap-3.5">
+          <div class="text-3xl p-2.5 bg-white rounded-2xl shadow-sm border border-slate-200">${item.icon}</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-kanit font-black text-xl text-slate-800">${i + 1}. ${item.title}</span>
+              <span class="${item.badgeBg} text-xs font-extrabold px-3 py-0.5 rounded-full">${item.subtitle}</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 font-bold mb-2 leading-relaxed">${item.desc}</p>
+            <div class="flex flex-wrap gap-1.5 items-center">
+              <span class="text-xs font-black text-slate-400">ตัวอย่าง:</span>
+              ${item.examples.slice(0, 5).map(ex => `
+                <span class="bg-white/90 border border-slate-300 text-slate-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg shadow-2xs">
+                  ${ex}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeInfoModal() {
+      document.getElementById('infoModal').classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    /* ==========================================================================
+       CONFETTI CANVAS ANIMATION
+       ========================================================================== */
+    function triggerConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#ff7675', '#fdcb6e', '#55efc4', '#74b9ff', '#a29bfe', '#fd79a8'];
+
+      for (let i = 0; i < 90; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.75) * 16,
+          size: Math.random() * 9 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          opacity: 1
+        });
+      }
+
+      let frame = 0;
+      function renderConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let activeCount = 0;
+
+        particles.forEach(p => {
+          if (p.opacity > 0) {
+            activeCount++;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.38; // Gravity
+            p.opacity -= 0.012;
+            p.rotation += p.rotationSpeed;
+
+            ctx.save();
+            ctx.globalAlpha = Math.max(p.opacity, 0);
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+          }
+        });
+
+        if (activeCount > 0 && frame < 160) {
+          frame++;
+          requestAnimationFrame(renderConfetti);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      renderConfetti();
+    }
+
+    // Responsive Window Resize handling
+    window.addEventListener('resize', () => {
+      if (!isSpinning && document.getElementById('gameScreen').classList.contains('hidden') === false) {
+        resetTrackToBaseline();
+      }
+    });
+
+    // Window Load Initialization
+    window.onload = function() {
+      resetTrackToBaseline();
+    };
+  </script>
+</body>
+</html>
