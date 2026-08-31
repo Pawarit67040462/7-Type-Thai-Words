@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ลูเล็ตสุ่มชนิดของคำไทย 7 ชนิด</title>
+  <title>ชนิดของคำไทย 7 ชนิด</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -125,76 +125,134 @@
   </div>
 
   <!-- Main Container -->
-  <div class="relative z-10 flex-1 flex flex-col justify-between max-w-5xl mx-auto w-full px-4 py-4 min-h-screen">
+  <div class="relative z-10 flex-1 flex flex-col justify-between max-w-5xl mx-auto w-full px-4 py-3 min-h-screen">
 
     <!-- Navbar -->
-    <header class="flex justify-between items-center bg-white/90 backdrop-blur-md px-6 py-3.5 rounded-3xl border-4 border-white shadow-cartoon mb-3">
+    <header class="flex flex-wrap justify-between items-center bg-white/90 backdrop-blur-md px-5 py-3 rounded-3xl border-4 border-white shadow-cartoon mb-2 gap-2">
       <div class="flex items-center gap-3">
-        <div class="bg-amber-400 p-2.5 rounded-2xl border-2 border-amber-500 shadow-sm text-3xl flex items-center justify-center">
+        <div class="bg-amber-400 p-2 rounded-2xl border-2 border-amber-500 shadow-sm text-2xl sm:text-3xl flex items-center justify-center">
           🎡
         </div>
         <div>
-          <h1 class="font-kanit font-black text-xl sm:text-2xl text-slate-800 leading-tight drop-shadow-sm">
-            ลูเล็ตสุ่มชนิดของคำไทย 7 ชนิด
+          <h1 class="font-kanit font-black text-lg sm:text-2xl text-slate-800 leading-tight drop-shadow-sm">
+            ชนิดของคำไทย 7 ชนิด
           </h1>
-          <p class="text-xs sm:text-sm text-slate-500 font-bold">สื่อการเรียนรู้ภาษาไทยสำหรับเด็กประถม</p>
+          <p class="text-xs sm:text-sm text-slate-500 font-bold">สื่อการเรียนรู้ภาษาไทยสำหรับนัเรียนชั้นประถมศึกษาปีที่ 6</p>
         </div>
       </div>
-      <button id="btnInfo" onclick="openInfoModal()" class="bg-sky-400 hover:bg-sky-500 text-white font-bold px-4 py-2.5 rounded-2xl border-2 border-sky-600 shadow-cartoon-sm hover:scale-105 transition active:scale-95 flex items-center gap-1.5 text-sm sm:text-base">
-        <span>💡</span> <span class="hidden sm:inline">คู่มือ</span>คำ 7 ชนิด
-      </button>
+      
+      <div class="flex items-center gap-2">
+        <button id="btnRules" onclick="openRulesModal()" class="bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-3.5 py-2 rounded-2xl border-2 border-amber-600 shadow-cartoon-sm hover:scale-105 transition active:scale-95 flex items-center gap-1.5 text-xs sm:text-sm">
+          <span>📜</span> กติกาการเล่น
+        </button>
+        <button id="btnInfo" onclick="openInfoModal()" class="bg-sky-400 hover:bg-sky-500 text-white font-bold px-3.5 py-2 rounded-2xl border-2 border-sky-600 shadow-cartoon-sm hover:scale-105 transition active:scale-95 flex items-center gap-1.5 text-xs sm:text-sm">
+          <span>💡</span> คู่มือคำ 7 ชนิด
+        </button>
+      </div>
     </header>
 
     <!-- SCREEN 1: WELCOME SCREEN -->
-    <main id="welcomeScreen" class="flex-1 flex flex-col items-center justify-center text-center py-6 my-auto">
-      <div class="bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-3xl border-4 border-amber-300 shadow-cartoon-lg max-w-2xl w-full relative overflow-hidden">
+    <main id="welcomeScreen" class="flex-1 flex flex-col items-center justify-center text-center py-4 my-auto">
+      <div class="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl border-4 border-amber-300 shadow-cartoon-lg max-w-2xl w-full relative overflow-hidden">
         
         <div class="absolute -top-3 -left-3 bg-pink-500 text-white text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full border-2 border-white shadow-md transform -rotate-12">
           ภาษาไทยสุดสนุก! 🎒
         </div>
         <div class="absolute -bottom-3 -right-3 bg-teal-500 text-white text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full border-2 border-white shadow-md transform rotate-6">
-          หมุนไว ได้ความรู้ ✨
+          แข่งขัน 2 ทีม 🏆
         </div>
 
-        <div class="my-4">
-          <span class="inline-block text-8xl sm:text-9xl animate-bounce-gentle drop-shadow-md">🎰</span>
+        <div class="my-3">
+          <span class="inline-block text-7xl sm:text-8xl animate-bounce-gentle drop-shadow-md">🎰</span>
         </div>
 
-        <h2 class="font-kanit text-3xl sm:text-4xl font-black text-amber-500 mb-3 drop-shadow-sm">
-          มาหมุนลูเล็ตสุ่มชนิดของคำกัน!
+        <h2 class="font-kanit text-2xl sm:text-4xl font-black text-amber-500 mb-2 drop-shadow-sm">
+          กิจกรรมประลองแต่งประโยค
         </h2>
         
-        <p class="text-slate-600 text-base sm:text-lg mb-8 max-w-md mx-auto leading-relaxed font-semibold">
-          เรียนรู้และทดสอบ <span class="font-black text-pink-500 underline decoration-wavy underline-offset-4">ชนิดของคำไทยทั้ง 7 ชนิด</span> 
+        <p class="text-slate-600 text-sm sm:text-base mb-6 max-w-md mx-auto leading-relaxed font-semibold">
+           <span class="font-black text-pink-500 underline decoration-wavy underline-offset-4"></span> 
         </p>
 
-        <div class="flex flex-wrap justify-center gap-2 mb-8 max-w-lg mx-auto">
-          <span class="bg-rose-100 text-rose-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-rose-300">1. คำนาม</span>
-          <span class="bg-amber-100 text-amber-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-amber-300">2. คำสรรพนาม</span>
-          <span class="bg-emerald-100 text-emerald-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-emerald-300">3. คำกริยา</span>
-          <span class="bg-sky-100 text-sky-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-sky-300">4. คำวิเศษณ์</span>
-          <span class="bg-purple-100 text-purple-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-purple-300">5. คำบุพบท</span>
-          <span class="bg-orange-100 text-orange-700 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-orange-300">6. คำสันธาน</span>
-          <span class="bg-yellow-100 text-yellow-800 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-yellow-400">7. คำอุทาน</span>
+        <div class="flex flex-wrap justify-center gap-2 mb-6 max-w-lg mx-auto">
+          <span class="bg-rose-100 text-rose-700 px-3 py-1 rounded-xl text-xs font-extrabold border-2 border-rose-300">1. คำนาม</span>
+          <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-xl text-xs font-extrabold border-2 border-amber-300">2. คำสรรพนาม</span>
+          <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-xl text-xs font-extrabold border-2 border-emerald-300">3. คำกริยา</span>
+          <span class="bg-sky-100 text-sky-700 px-3 py-1 rounded-xl text-xs font-extrabold border-2 border-sky-300">4. คำวิเศษณ์</span>
+          <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-xl text-xs font-extrabold border-2 border-purple-300">5. คำบุพบท</span>
+          <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-xl text-xs font-extrabold border-2 border-orange-300">6. คำสันธาน</span>
+          <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-xl text-xs font-extrabold border-2 border-yellow-400">7. คำอุทาน</span>
         </div>
 
-        <button id="btnStartGame" onclick="startGame()" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-500 hover:to-teal-500 text-white font-kanit font-black text-2xl sm:text-3xl px-12 py-4 rounded-3xl border-4 border-emerald-600 shadow-cartoon hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-3 mx-auto">
+        <button id="btnStartGame" onclick="startGame()" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-500 hover:to-teal-500 text-white font-kanit font-black text-xl sm:text-2xl px-10 py-3.5 rounded-3xl border-4 border-emerald-600 shadow-cartoon hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-3 mx-auto">
           <span>🎮</span> เริ่มหมุนสุ่มคำ!
         </button>
       </div>
     </main>
 
     <!-- SCREEN 2: MAIN GAME SCREEN -->
-    <main id="gameScreen" class="hidden flex-1 flex flex-col justify-center items-center py-2 my-auto w-full">
+    <main id="gameScreen" class="hidden flex-1 flex flex-col justify-between items-center py-1 my-auto w-full">
       
-      <div class="bg-white/90 backdrop-blur-sm px-8 py-3 rounded-2xl border-4 border-amber-300 shadow-cartoon-sm mb-4 text-center">
-        <p id="gameStatusText" class="font-kanit font-extrabold text-slate-800 text-base sm:text-xl">
-          กดปุ่ม <span class="text-amber-500 font-black">"หมุนลูเล็ตสุ่มคำ!"</span> เพื่อเริ่มสุ่มคำทันที
+      <!-- TEAMS STATUS PANEL -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-4xl mb-2">
+        
+        <!-- TEAM 1 BOX -->
+        <div id="team1Card" class="bg-white/95 backdrop-blur-md p-3.5 rounded-3xl border-4 border-rose-400 shadow-cartoon-sm transition-all duration-300 relative overflow-hidden">
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-2">
+              <span class="bg-rose-500 text-white text-xs font-black px-3 py-1 rounded-full shadow-sm">🔴 ทีม 1</span>
+              <span id="team1TurnBadge" class="text-xs font-bold text-rose-600 bg-rose-100 px-2.5 py-0.5 rounded-lg border border-rose-300">สุ่มแล้ว 0/3 คำ</span>
+            </div>
+            <span id="team1ActiveTag" class="hidden text-[11px] font-black bg-amber-400 text-amber-950 px-2 py-0.5 rounded-full animate-pulse">กำลังสุ่ม!</span>
+          </div>
+
+          <div class="flex gap-1.5 mb-2" id="team1WordsList"></div>
+
+          <div id="team1EventBox" class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-2 flex items-center justify-between gap-2 hidden">
+            <div class="text-left flex-1">
+              <span class="text-[10px] font-black text-rose-500 uppercase block">🎉 โจทย์อีเว้นท์ ทีม 1:</span>
+              <span id="team1EventText" class="font-kanit font-extrabold text-xs sm:text-sm text-rose-900 block leading-tight"></span>
+            </div>
+            <button onclick="reshuffleEvent(1)" title="สุ่มโจทย์อีเว้นท์ใหม่" class="bg-white hover:bg-rose-100 text-rose-600 p-1.5 rounded-xl border border-rose-300 shadow-sm active:scale-95 transition flex items-center gap-1 text-xs font-bold flex-shrink-0">
+              🔄 <span class="hidden sm:inline">สุ่มใหม่</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- TEAM 2 BOX -->
+        <div id="team2Card" class="bg-white/95 backdrop-blur-md p-3.5 rounded-3xl border-4 border-sky-400 shadow-cartoon-sm transition-all duration-300 relative overflow-hidden">
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-2">
+              <span class="bg-sky-500 text-white text-xs font-black px-3 py-1 rounded-full shadow-sm">🔵 ทีม 2</span>
+              <span id="team2TurnBadge" class="text-xs font-bold text-sky-600 bg-sky-100 px-2.5 py-0.5 rounded-lg border border-sky-300">สุ่มแล้ว 0/3 คำ</span>
+            </div>
+            <span id="team2ActiveTag" class="hidden text-[11px] font-black bg-amber-400 text-amber-950 px-2 py-0.5 rounded-full animate-pulse">กำลังสุ่ม!</span>
+          </div>
+
+          <div class="flex gap-1.5 mb-2" id="team2WordsList"></div>
+
+          <div id="team2EventBox" class="bg-sky-50 border-2 border-sky-200 rounded-2xl p-2 flex items-center justify-between gap-2 hidden">
+            <div class="text-left flex-1">
+              <span class="text-[10px] font-black text-sky-500 uppercase block">🎉 โจทย์อีเว้นท์ ทีม 2:</span>
+              <span id="team2EventText" class="font-kanit font-extrabold text-xs sm:text-sm text-sky-900 block leading-tight"></span>
+            </div>
+            <button onclick="reshuffleEvent(2)" title="สุ่มโจทย์อีเว้นท์ใหม่" class="bg-white hover:bg-sky-100 text-sky-600 p-1.5 rounded-xl border border-sky-300 shadow-sm active:scale-95 transition flex items-center gap-1 text-xs font-bold flex-shrink-0">
+              🔄 <span class="hidden sm:inline">สุ่มใหม่</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Turn Banner -->
+      <div class="bg-white/90 backdrop-blur-sm px-6 py-2 rounded-2xl border-4 border-amber-300 shadow-cartoon-sm mb-2 text-center">
+        <p id="gameStatusText" class="font-kanit font-extrabold text-slate-800 text-sm sm:text-lg">
+          🎯 ถึงตา <span class="text-rose-600 font-black">🔴 ทีม 1</span> กดหมุนสุ่มคำ!
         </p>
       </div>
 
       <!-- ROULETTE CONTAINER -->
-      <div class="relative w-full max-w-4xl bg-slate-900 p-3 sm:p-4 rounded-3xl border-8 border-amber-400 shadow-cartoon-lg overflow-hidden my-2">
+      <div class="relative w-full max-w-4xl bg-slate-900 p-3 sm:p-4 rounded-3xl border-8 border-amber-400 shadow-cartoon-lg overflow-hidden my-1">
         
         <!-- Center Pointer Pin -->
         <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center justify-between">
@@ -205,8 +263,8 @@
 
         <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/40 z-20 pointer-events-none rounded-2xl"></div>
 
-        <!-- Viewport & Track: แก้ไขให้จัดกึ่งกลางแนวตั้ง 100% ไม่เหลือพื้นที่ว่างสีเทาด้านบน -->
-        <div id="rouletteViewport" class="roulette-viewport w-full h-48 sm:h-56 bg-slate-950 rounded-2xl overflow-hidden relative">
+        <!-- Viewport & Track -->
+        <div id="rouletteViewport" class="roulette-viewport w-full h-44 sm:h-52 bg-slate-950 rounded-2xl overflow-hidden relative">
           <div id="rouletteTrack" class="roulette-track flex gap-4 px-4 absolute left-0 top-0 bottom-0 items-center">
             <!-- Dynamic Cards -->
           </div>
@@ -214,53 +272,108 @@
 
       </div>
 
-      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
-        <button onclick="showWelcomeScreen()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-4 rounded-2xl border-2 border-slate-300 shadow-cartoon-sm hover:scale-105 active:scale-95 transition text-base">
-          ⬅️ หน้าหลัก
+      <!-- Controls Buttons -->
+      <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
+        <button onclick="resetMatchGame()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3.5 rounded-2xl border-2 border-slate-300 shadow-cartoon-sm hover:scale-105 active:scale-95 transition text-sm">
+          🔄 เริ่มรอบใหม่
         </button>
-        <button id="btnSpin" onclick="startSpin()" class="w-full sm:flex-1 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 hover:from-amber-500 hover:to-orange-500 text-white font-kanit font-black text-2xl py-4 px-8 rounded-2xl border-4 border-amber-600 shadow-cartoon hover:scale-105 active:scale-95 transition-all duration-150 cursor-pointer flex items-center justify-center gap-2">
-          <span>🎰</span> หมุนลูเล็ตสุ่มคำ!
+        <button id="btnSpin" onclick="startSpin()" class="w-full sm:flex-1 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 hover:from-amber-500 hover:to-orange-500 text-white font-kanit font-black text-xl sm:text-2xl py-3.5 px-6 rounded-2xl border-4 border-amber-600 shadow-cartoon hover:scale-105 active:scale-95 transition-all duration-150 cursor-pointer flex items-center justify-center gap-2">
+          <span>🎰</span> <span id="spinBtnText">หมุนสุ่มคำให้ ทีม 1</span>
         </button>
       </div>
 
     </main>
 
-    <footer class="text-center py-3 text-xs text-slate-500 font-semibold">
-      <p>สื่อการเรียนรู้กลุ่มสาระการเรียนรู้ภาษาไทย • ปรับปรุงระบบสุ่มความเร็วสูงและการแสดงผล 100% 🌟</p>
+    <footer class="text-center py-2 text-xs text-slate-500 font-semibold">
+      <p>สื่อการเรียนรู้กลุ่มสาระการเรียนรู้ภาษาไทย • รองรับการสุ่มใหม่รายอัน 🌟</p>
     </footer>
 
+  </div>
+
+  <!-- RULES MODAL -->
+  <div id="rulesModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white rounded-3xl border-4 border-amber-400 shadow-cartoon-lg max-w-lg w-full p-6 text-left relative overflow-hidden">
+      
+      <div class="flex justify-between items-center pb-3 border-b-2 border-amber-100 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-3xl">📜</span>
+          <h3 class="font-kanit font-extrabold text-2xl text-slate-800">กติกาการแข่งขัน</h3>
+        </div>
+        <button onclick="closeRulesModal()" class="w-9 h-9 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full font-bold text-lg flex items-center justify-center transition">
+          ✕
+        </button>
+      </div>
+
+      <div class="space-y-4 text-slate-700 font-bold text-sm sm:text-base leading-relaxed">
+        <div class="flex gap-3 items-start bg-amber-50 p-3 rounded-2xl border border-amber-200">
+          <span class="bg-amber-400 text-amber-950 w-7 h-7 rounded-full flex items-center justify-center font-black flex-shrink-0">1</span>
+          <p class="pt-0.5">ให้นักเรียนแบ่งออกเป็น <span class="text-amber-600 font-black">2 กลุ่ม (ทีม 1 และ ทีม 2)</span></p>
+        </div>
+
+        <div class="flex gap-3 items-start bg-sky-50 p-3 rounded-2xl border border-sky-200">
+          <span class="bg-sky-400 text-white w-7 h-7 rounded-full flex items-center justify-center font-black flex-shrink-0">2</span>
+          <p class="pt-0.5">สลับกันสุ่มชนิดของคำ <span class="text-sky-600 font-black">ทีมละ 3 คำ</span> (สามารถสุ่มชนิดคำและอีเวนท์ใหม่ได้ทีมละ 1 ชนิด)</p>
+        </div>
+
+        <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+          <div class="flex items-center gap-2 text-emerald-800 font-extrabold mb-2 text-base">
+            <span>🏆</span> เกณฑ์การให้คะแนน:
+          </div>
+          <ul class="space-y-2 text-xs sm:text-sm text-emerald-950 font-semibold pl-2">
+            <li class="flex items-center gap-2">
+              <span class="text-emerald-500">✓</span> มีคำทั้ง 3 ชนิดในหนึ่งประโยค <strong class="text-emerald-700 font-black">(1 คะแนน)</strong>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-emerald-500">✓</span> ประโยคถูกต้องตามหลักภาษา <strong class="text-emerald-700 font-black">(1 คะแนน)</strong>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-emerald-500">✓</span> กลุ่มที่แต่งประโยคเสร็จก่อนและถูกต้อง <strong class="text-emerald-700 font-black">(1 คะแนน)</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-4 mt-2 text-right border-t border-slate-100">
+        <button onclick="closeRulesModal()" class="w-full bg-amber-400 hover:bg-amber-500 text-amber-950 font-kanit font-black text-lg py-2.5 rounded-2xl border-2 border-amber-600 shadow-cartoon-sm transition">
+          เข้าใจกติกาแล้ว!
+        </button>
+      </div>
+
+    </div>
   </div>
 
   <!-- RESULT MODAL -->
   <div id="resultModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div id="resultCard" class="bg-white rounded-3xl border-8 border-amber-300 shadow-cartoon-lg max-w-md w-full p-6 sm:p-7 text-center transform scale-95 transition-transform duration-300 relative overflow-hidden">
       
-      <div class="inline-block bg-amber-400 text-amber-950 font-kanit font-extrabold text-base px-5 py-1.5 rounded-full border-2 border-amber-500 mb-3 shadow-sm">
+      <div id="modalTeamTag" class="inline-block bg-amber-400 text-amber-950 font-kanit font-extrabold text-base px-5 py-1.5 rounded-full border-2 border-amber-500 mb-3 shadow-sm">
         🎉 สุ่มสำเร็จ! ได้คำชนิดนี้
       </div>
 
       <div id="modalIcon" class="text-7xl my-3 animate-bounce-gentle">✨</div>
       <h3 id="modalTitle" class="font-kanit text-4xl font-black text-slate-800 mb-1">คำนาม</h3>
-      <p id="modalSubtitle" class="inline-block px-4 py-1 rounded-xl text-base font-black text-white bg-pink-500 mb-4">(เรียกชื่อ)</p>
+      <p id="modalSubtitle" class="inline-block px-4 py-1 rounded-xl text-base font-black text-white bg-pink-500 mb-3">(เรียกชื่อ)</p>
 
-      <div class="bg-slate-50 p-4 rounded-2xl border-2 border-slate-200 text-left mb-4">
+      <div class="bg-slate-50 p-3.5 rounded-2xl border-2 border-slate-200 text-left mb-3">
         <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider mb-1">ความหมาย:</h4>
-        <p id="modalDesc" class="text-slate-800 text-base leading-relaxed font-bold">
+        <p id="modalDesc" class="text-slate-800 text-sm sm:text-base leading-relaxed font-bold">
           คำที่ใช้เรียกชื่อคน สัตว์ สิ่งของ หรือสถานที่
         </p>
       </div>
 
-      <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 text-left mb-6">
-        <h4 class="font-bold text-xs text-amber-600 uppercase tracking-wider mb-2">💡 ตัวอย่างคำชนิดนี้:</h4>
-        <div id="modalExamples" class="flex flex-wrap gap-2"></div>
+      <div class="bg-amber-50 p-3.5 rounded-2xl border-2 border-amber-200 text-left mb-4">
+        <h4 class="font-bold text-xs text-amber-600 uppercase tracking-wider mb-1.5">💡 ตัวอย่างคำชนิดนี้:</h4>
+        <div id="modalExamples" class="flex flex-wrap gap-1.5"></div>
+      </div>
+
+      <div id="modalEventAlert" class="hidden bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3.5 rounded-2xl shadow-cartoon-sm mb-4 text-center">
+        <span class="text-xs font-black uppercase block tracking-wider text-yellow-200">🎯 อีเว้นท์พิเศษถูกปลดล็อกแล้ว!</span>
+        <p id="modalEventText" class="font-kanit font-black text-lg mt-0.5"></p>
       </div>
 
       <div class="flex gap-3">
-        <button onclick="closeResultModal()" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3.5 px-4 rounded-2xl border-2 border-slate-300 shadow-cartoon-sm text-base active:scale-95 transition">
-          ปิดหน้านี้
-        </button>
-        <button onclick="closeResultModal(); startSpin();" class="flex-1 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-kanit font-extrabold py-3.5 px-4 rounded-2xl border-2 border-emerald-600 shadow-cartoon-sm text-base active:scale-95 transition flex items-center justify-center gap-1.5">
-          <span>🔄</span> สุ่มอีกครั้ง!
+        <button onclick="closeResultModal()" class="w-full bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-kanit font-extrabold py-3.5 px-4 rounded-2xl border-2 border-emerald-600 shadow-cartoon-sm text-base active:scale-95 transition flex items-center justify-center gap-1.5">
+          <span>👍</span> ตกลง
         </button>
       </div>
 
@@ -387,7 +500,30 @@
       }
     ];
 
+    const GAME_EVENTS = [
+      '🐶 แต่งประโยคเกี่ยวกับ "สัตว์เลี้ยงและสิ่งมีชีวิต"',
+      '🏫 แต่งประโยคเกี่ยวกับ "เรื่องราวในโรงเรียน"',
+      '🍕 แต่งประโยคเกี่ยวกับ "อาหารและของกินแสนอร่อย"',
+      '⚽ แต่งประโยคเกี่ยวกับ "การเล่นสนุกและเล่นกีฬา"',
+      '🏡 แต่งประโยคเกี่ยวกับ "บ้านและครอบครัว"',
+      '🌳 แต่งประโยคเกี่ยวกับ "ธรรมชาติและสิ่งแวดล้อม"',
+      '🚀 แต่งประโยคเกี่ยวกับ "ความฝันและจินตนาการ"'
+    ];
+
+    // Game state variables
+    let activeTeam = 1;
+    let team1Words = [];
+    let team2Words = [];
+    let team1Event = '';
+    let team2Event = '';
+
+    let replacingTarget = null;
     let audioCtx = null;
+
+    // IDLE SCROLL ANIMATION VARIABLES
+    let isIdleScrolling = false;
+    let idleReqId = null;
+    let idleSpeed = 0.65; // ความเร็วของการเลื่อนช้าๆ
 
     function initAudio() {
       if (!audioCtx) {
@@ -440,7 +576,7 @@
     let currentX = 0;
     const START_INDEX = 4;
     const SPIN_DISTANCE_CARDS = 63;
-    const TOTAL_TRACK_CARDS = START_INDEX + SPIN_DISTANCE_CARDS + 14;
+    const TOTAL_TRACK_CARDS = START_INDEX + SPIN_DISTANCE_CARDS + 20;
 
     function getCardDimensions() {
       const isMobile = window.innerWidth < 640;
@@ -478,20 +614,167 @@
       `).join('');
     }
 
+    // IDLE SLIDE CONTROLLER
+    function startIdleScroll() {
+      if (isIdleScrolling || isSpinning) return;
+      isIdleScrolling = true;
+
+      function step() {
+        if (!isIdleScrolling) return;
+
+        const { step: cardStep } = getCardDimensions();
+        const loopWidth = WORD_CLASSES.length * cardStep;
+
+        currentX -= idleSpeed;
+
+        // Reset X position infinitely for seamless loop
+        if (Math.abs(currentX) >= loopWidth * 3) {
+          currentX += loopWidth;
+        }
+
+        const trackEl = document.getElementById('rouletteTrack');
+        if (trackEl) {
+          trackEl.style.transform = `translateX(${currentX}px)`;
+        }
+
+        idleReqId = requestAnimationFrame(step);
+      }
+
+      idleReqId = requestAnimationFrame(step);
+    }
+
+    function stopIdleScroll() {
+      isIdleScrolling = false;
+      if (idleReqId) {
+        cancelAnimationFrame(idleReqId);
+        idleReqId = null;
+      }
+    }
+
+    function requestSingleReshuffle(team, index) {
+      if (isSpinning) return;
+      replacingTarget = { team, index };
+      startSpin();
+    }
+
+    function reshuffleEvent(team) {
+      if (isSpinning) return;
+      initAudio();
+      playWinSound();
+      let currentEvt = team === 1 ? team1Event : team2Event;
+      let newEvt = currentEvt;
+      while (newEvt === currentEvt) {
+        newEvt = GAME_EVENTS[Math.floor(Math.random() * GAME_EVENTS.length)];
+      }
+      if (team === 1) team1Event = newEvt;
+      else team2Event = newEvt;
+      updateTeamsUI();
+    }
+
+    function updateTeamsUI() {
+      // Team 1 Badges
+      const t1Container = document.getElementById('team1WordsList');
+      t1Container.innerHTML = [0, 1, 2].map(idx => {
+        if (team1Words[idx]) {
+          const w = team1Words[idx];
+          return `<div onclick="requestSingleReshuffle(1, ${idx})" title="คลิกเพื่อสุ่มใหม่เฉพาะคำนี้" class="group relative flex-1 ${w.bgColor} text-white rounded-xl py-1.5 px-1 text-center font-kanit font-black text-xs sm:text-sm border-2 ${w.borderColor} shadow-sm truncate cursor-pointer hover:opacity-90 active:scale-95 transition">
+                    <span>${w.icon} ${w.title}</span>
+                    <span class="absolute right-1 top-1 text-[9px] bg-black/30 text-white rounded-full w-4 h-4 flex items-center justify-center opacity-70 group-hover:opacity-100">🔄</span>
+                  </div>`;
+        }
+        return `<div class="flex-1 bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl py-2 text-center text-xs font-bold text-slate-400">คำที่ ${idx + 1}</div>`;
+      }).join('');
+
+      // Team 2 Badges
+      const t2Container = document.getElementById('team2WordsList');
+      t2Container.innerHTML = [0, 1, 2].map(idx => {
+        if (team2Words[idx]) {
+          const w = team2Words[idx];
+          return `<div onclick="requestSingleReshuffle(2, ${idx})" title="คลิกเพื่อสุ่มใหม่เฉพาะคำนี้" class="group relative flex-1 ${w.bgColor} text-white rounded-xl py-1.5 px-1 text-center font-kanit font-black text-xs sm:text-sm border-2 ${w.borderColor} shadow-sm truncate cursor-pointer hover:opacity-90 active:scale-95 transition">
+                    <span>${w.icon} ${w.title}</span>
+                    <span class="absolute right-1 top-1 text-[9px] bg-black/30 text-white rounded-full w-4 h-4 flex items-center justify-center opacity-70 group-hover:opacity-100">🔄</span>
+                  </div>`;
+        }
+        return `<div class="flex-1 bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl py-2 text-center text-xs font-bold text-slate-400">คำที่ ${idx + 1}</div>`;
+      }).join('');
+
+      document.getElementById('team1TurnBadge').innerText = `สุ่มแล้ว ${team1Words.length}/3 คำ`;
+      document.getElementById('team2TurnBadge').innerText = `สุ่มแล้ว ${team2Words.length}/3 คำ`;
+
+      const card1 = document.getElementById('team1Card');
+      const card2 = document.getElementById('team2Card');
+      const tag1 = document.getElementById('team1ActiveTag');
+      const tag2 = document.getElementById('team2ActiveTag');
+
+      if (team1Words.length < 3 || team2Words.length < 3) {
+        if (activeTeam === 1 && team1Words.length < 3) {
+          card1.classList.add('ring-4', 'ring-rose-400', 'bg-rose-50/40');
+          card2.classList.remove('ring-4', 'ring-sky-400', 'bg-sky-50/40');
+          tag1.classList.remove('hidden');
+          tag2.classList.add('hidden');
+          document.getElementById('gameStatusText').innerHTML = `🎯 ถึงตา <span class="text-rose-600 font-black">🔴 ทีม 1</span> หมุนสุ่มคำที่ ${team1Words.length + 1}`;
+          document.getElementById('spinBtnText').innerText = `หมุนสุ่มคำให้ ทีม 1 (คำที่ ${team1Words.length + 1})`;
+        } else {
+          card2.classList.add('ring-4', 'ring-sky-400', 'bg-sky-50/40');
+          card1.classList.remove('ring-4', 'ring-rose-400', 'bg-rose-50/40');
+          tag2.classList.remove('hidden');
+          tag1.classList.add('hidden');
+          document.getElementById('gameStatusText').innerHTML = `🎯 ถึงตา <span class="text-sky-600 font-black">🔵 ทีม 2</span> หมุนสุ่มคำที่ ${team2Words.length + 1}`;
+          document.getElementById('spinBtnText').innerText = `หมุนสุ่มคำให้ ทีม 2 (คำที่ ${team2Words.length + 1})`;
+        }
+      } else {
+        card1.classList.remove('ring-4', 'ring-rose-400', 'bg-rose-50/40');
+        card2.classList.remove('ring-4', 'ring-sky-400', 'bg-sky-50/40');
+        tag1.classList.add('hidden');
+        tag2.classList.add('hidden');
+        document.getElementById('gameStatusText').innerHTML = `🎉 ครบแล้ว! คลิกที่ป้ายคำหรือโจทย์หากต้องการ <span class="text-amber-600 font-black underline">สุ่มใหม่รายอัน</span>`;
+        document.getElementById('spinBtnText').innerText = `สุ่มคำครบแล้ว`;
+      }
+
+      if (team1Event) {
+        document.getElementById('team1EventBox').classList.remove('hidden');
+        document.getElementById('team1EventBox').classList.add('flex');
+        document.getElementById('team1EventText').innerText = team1Event;
+      } else {
+        document.getElementById('team1EventBox').classList.add('hidden');
+        document.getElementById('team1EventBox').classList.remove('flex');
+      }
+
+      if (team2Event) {
+        document.getElementById('team2EventBox').classList.remove('hidden');
+        document.getElementById('team2EventBox').classList.add('flex');
+        document.getElementById('team2EventText').innerText = team2Event;
+      } else {
+        document.getElementById('team2EventBox').classList.add('hidden');
+        document.getElementById('team2EventBox').classList.remove('flex');
+      }
+    }
+
     function startGame() {
       initAudio();
       document.getElementById('welcomeScreen').classList.add('hidden');
       document.getElementById('gameScreen').classList.remove('hidden');
       
-      requestAnimationFrame(() => {
-        resetTrackToBaseline();
-      });
+      resetMatchGame();
     }
 
-    function showWelcomeScreen() {
-      if (isSpinning) return;
-      document.getElementById('gameScreen').classList.add('hidden');
-      document.getElementById('welcomeScreen').classList.remove('hidden');
+    function resetMatchGame() {
+      stopIdleScroll();
+
+      activeTeam = 1;
+      team1Words = [];
+      team2Words = [];
+      team1Event = '';
+      team2Event = '';
+      replacingTarget = null;
+
+      const spinBtn = document.getElementById('btnSpin');
+      spinBtn.disabled = false;
+      spinBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+
+      updateTeamsUI();
+      resetTrackToBaseline();
+      startIdleScroll();
     }
 
     function resetTrackToBaseline() {
@@ -515,11 +798,26 @@
 
     function startSpin() {
       if (isSpinning) return;
+      if (!replacingTarget && team1Words.length >= 3 && team2Words.length >= 3) {
+        alert("ทั้งสองทีมสุ่มคำครบ 3 คำแล้วครับ! สามารถคลิกที่ป้ายคำเดิมที่ต้องการสุ่มใหม่ได้เลย");
+        return;
+      }
+
+      // Stop slow idle animation when spin starts
+      stopIdleScroll();
       initAudio();
 
       const spinBtn = document.getElementById('btnSpin');
       spinBtn.disabled = true;
       spinBtn.classList.add('opacity-60', 'cursor-not-allowed');
+
+      let currentTeamName = activeTeam === 1 ? '🔴 ทีม 1' : '🔵 ทีม 2';
+      if (replacingTarget) {
+        currentTeamName = replacingTarget.team === 1 ? '🔴 ทีม 1' : '🔵 ทีม 2';
+        document.getElementById('gameStatusText').innerHTML = `⏳ กำลังหมุนสุ่มคำใหม่ให้ <span class="font-black text-amber-500">${currentTeamName} (คำที่ ${replacingTarget.index + 1})</span>...`;
+      } else {
+        document.getElementById('gameStatusText').innerHTML = `⏳ กำลังหมุนสุ่มคำให้ <span class="font-black text-amber-500">${currentTeamName}</span>...`;
+      }
 
       const winningItem = WORD_CLASSES[Math.floor(Math.random() * WORD_CLASSES.length)];
       const targetWinnerIndex = START_INDEX + SPIN_DISTANCE_CARDS;
@@ -536,21 +834,16 @@
         viewportWidth = Math.min(window.innerWidth - 32, 896);
       }
 
-      currentX = (viewportWidth / 2) - (START_INDEX * step + cardWidth / 2);
-      trackEl.style.transform = `translateX(${currentX}px)`;
-      void trackEl.offsetWidth;
-
+      // Smooth transition from current idle position
+      const startX = currentX;
       isSpinning = true;
-      document.getElementById('gameStatusText').innerHTML = '⏳ กำลังหมุนด้วยความเร็วสูง...';
 
       const randomCardOffset = (Math.random() - 0.5) * (cardWidth * 0.4);
       const targetX = (viewportWidth / 2) - (targetWinnerIndex * step + cardWidth / 2 + randomCardOffset);
-
-      const startX = currentX;
       const distance = targetX - startX;
       const duration = 5800;
       let startTime = null;
-      let lastTickCardIndex = START_INDEX;
+      let lastTickCardIndex = Math.floor(((viewportWidth / 2) - startX) / step);
 
       function easeOutQuart(t) {
         return 1 - Math.pow(1 - t, 4);
@@ -576,35 +869,78 @@
           requestAnimationFrame(animateSpin);
         } else {
           isSpinning = false;
+          
+          let newlyUnlockedEvent = '';
+          let spunTeamNumber = activeTeam;
+
+          if (replacingTarget) {
+            spunTeamNumber = replacingTarget.team;
+            if (replacingTarget.team === 1) team1Words[replacingTarget.index] = winningItem;
+            else team2Words[replacingTarget.index] = winningItem;
+            replacingTarget = null;
+          } else {
+            if (activeTeam === 1) {
+              team1Words.push(winningItem);
+              if (team1Words.length === 3 && !team1Event) {
+                team1Event = GAME_EVENTS[Math.floor(Math.random() * GAME_EVENTS.length)];
+                newlyUnlockedEvent = team1Event;
+              }
+              if (team2Words.length < 3) activeTeam = 2;
+            } else {
+              team2Words.push(winningItem);
+              if (team2Words.length === 3 && !team2Event) {
+                team2Event = GAME_EVENTS[Math.floor(Math.random() * GAME_EVENTS.length)];
+                newlyUnlockedEvent = team2Event;
+              }
+              if (team1Words.length < 3) activeTeam = 1;
+            }
+          }
+
+          updateTeamsUI();
+
           spinBtn.disabled = false;
           spinBtn.classList.remove('opacity-60', 'cursor-not-allowed');
-          document.getElementById('gameStatusText').innerHTML = `🎉 สุ่มได้: <span class="${winningItem.textColor} font-black text-2xl">${winningItem.title}</span>`;
-          
+
           playWinSound();
           triggerConfetti();
-          openResultModal(winningItem);
+          openResultModal(winningItem, spunTeamNumber, newlyUnlockedEvent);
         }
       }
 
       requestAnimationFrame(animateSpin);
     }
 
-    function openResultModal(item) {
+    function openResultModal(item, spunByTeam, unlockedEventText) {
       const modal = document.getElementById('resultModal');
       const card = document.getElementById('resultCard');
+
+      const teamName = spunByTeam === 1 ? '🔴 ทีม 1' : '🔵 ทีม 2';
+      const badgeBg = spunByTeam === 1 ? 'bg-rose-500 border-rose-600 text-white' : 'bg-sky-500 border-sky-600 text-white';
+
+      const modalTeamTag = document.getElementById('modalTeamTag');
+      modalTeamTag.innerText = `🎉 ${teamName} สุ่มได้คำนี้!`;
+      modalTeamTag.className = `inline-block font-kanit font-black text-base px-5 py-1.5 rounded-full border-2 mb-3 shadow-sm ${badgeBg}`;
 
       document.getElementById('modalIcon').innerText = item.icon;
       document.getElementById('modalTitle').innerText = item.title;
       document.getElementById('modalSubtitle').innerText = `(${item.subtitle})`;
-      document.getElementById('modalSubtitle').className = `inline-block px-4 py-1 rounded-xl text-base font-black text-white ${item.bgColor} mb-4 shadow-sm`;
+      document.getElementById('modalSubtitle').className = `inline-block px-4 py-1 rounded-xl text-base font-black text-white ${item.bgColor} mb-3 shadow-sm`;
       document.getElementById('modalDesc').innerText = item.desc;
 
       const examplesContainer = document.getElementById('modalExamples');
       examplesContainer.innerHTML = item.examples.map(ex => `
-        <span class="bg-white px-3.5 py-1.5 rounded-xl border-2 border-amber-300 text-amber-950 font-extrabold text-sm shadow-sm">
+        <span class="bg-white px-3 py-1 rounded-xl border-2 border-amber-300 text-amber-950 font-extrabold text-xs shadow-sm">
           ${ex}
         </span>
       `).join('');
+
+      const eventAlert = document.getElementById('modalEventAlert');
+      if (unlockedEventText) {
+        eventAlert.classList.remove('hidden');
+        document.getElementById('modalEventText').innerText = unlockedEventText;
+      } else {
+        eventAlert.classList.add('hidden');
+      }
 
       modal.classList.remove('opacity-0', 'pointer-events-none');
       card.classList.remove('scale-95');
@@ -618,6 +954,21 @@
       modal.classList.add('opacity-0', 'pointer-events-none');
       card.classList.remove('scale-100');
       card.classList.add('scale-95');
+
+      // Resume idle scroll after result modal is closed if not completed
+      if (team1Words.length < 3 || team2Words.length < 3) {
+        startIdleScroll();
+      }
+    }
+
+    function openRulesModal() {
+      const modal = document.getElementById('rulesModal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeRulesModal() {
+      const modal = document.getElementById('rulesModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
     }
 
     function openInfoModal() {
