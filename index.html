@@ -60,8 +60,8 @@
 
     .roulette-viewport {
       perspective: 1000px;
-      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     }
 
     .roulette-track {
@@ -194,7 +194,7 @@
       </div>
 
       <!-- ROULETTE CONTAINER -->
-      <div class="relative w-full max-w-4xl bg-slate-900 p-3 sm:p-5 rounded-3xl border-8 border-amber-400 shadow-cartoon-lg overflow-hidden my-2">
+      <div class="relative w-full max-w-4xl bg-slate-900 p-3 sm:p-4 rounded-3xl border-8 border-amber-400 shadow-cartoon-lg overflow-hidden my-2">
         
         <!-- Center Pointer Pin -->
         <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center justify-between">
@@ -205,8 +205,9 @@
 
         <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/40 z-20 pointer-events-none rounded-2xl"></div>
 
-        <div id="rouletteViewport" class="roulette-viewport w-full h-56 sm:h-64 bg-slate-950 rounded-2xl overflow-hidden relative flex items-center">
-          <div id="rouletteTrack" class="roulette-track flex gap-4 px-4 absolute left-0 top-1/2 -translate-y-1/2">
+        <!-- Viewport & Track: แก้ไขให้จัดกึ่งกลางแนวตั้ง 100% ไม่เหลือพื้นที่ว่างสีเทาด้านบน -->
+        <div id="rouletteViewport" class="roulette-viewport w-full h-48 sm:h-56 bg-slate-950 rounded-2xl overflow-hidden relative">
+          <div id="rouletteTrack" class="roulette-track flex gap-4 px-4 absolute left-0 top-0 bottom-0 items-center">
             <!-- Dynamic Cards -->
           </div>
         </div>
@@ -438,25 +439,23 @@
     let isSpinning = false;
     let currentX = 0;
     const START_INDEX = 4;
-    const SPIN_DISTANCE_CARDS = 62;
-    const TOTAL_TRACK_CARDS = START_INDEX + SPIN_DISTANCE_CARDS + 10;
+    const SPIN_DISTANCE_CARDS = 63;
+    const TOTAL_TRACK_CARDS = START_INDEX + SPIN_DISTANCE_CARDS + 14;
 
     function getCardDimensions() {
       const isMobile = window.innerWidth < 640;
-      const cardWidth = isMobile ? 160 : 205;
+      const cardWidth = isMobile ? 140 : 170;
       const cardGap = 16;
       return { cardWidth, cardGap, step: cardWidth + cardGap };
     }
 
     function buildTrackWithWinner(targetIndex, winnerObject) {
       trackItems = [];
+      const winnerTypeIndex = WORD_CLASSES.findIndex(w => w.id === winnerObject.id);
+
       for (let i = 0; i < TOTAL_TRACK_CARDS; i++) {
-        if (i === targetIndex && winnerObject) {
-          trackItems.push(winnerObject);
-        } else {
-          const randomIndex = Math.floor(Math.random() * WORD_CLASSES.length);
-          trackItems.push(WORD_CLASSES[randomIndex]);
-        }
+        const classIndex = (winnerTypeIndex + (i - targetIndex) % WORD_CLASSES.length + WORD_CLASSES.length) % WORD_CLASSES.length;
+        trackItems.push(WORD_CLASSES[classIndex]);
       }
     }
 
@@ -465,14 +464,14 @@
       const { cardWidth } = getCardDimensions();
       
       trackEl.innerHTML = trackItems.map((item) => `
-        <div class="word-card flex-shrink-0 bg-white rounded-3xl border-4 ${item.borderColor} shadow-cartoon-sm flex flex-col justify-between p-4 select-none text-center cursor-pointer"
-             style="width: ${cardWidth}px; height: 210px;">
-          <div class="text-4xl sm:text-5xl mt-1 drop-shadow-sm">${item.icon}</div>
+        <div class="word-card flex-shrink-0 bg-white rounded-3xl border-4 ${item.borderColor} shadow-cartoon-sm flex flex-col items-center justify-between p-3.5 sm:p-4 select-none text-center cursor-pointer aspect-square box-border"
+             style="width: ${cardWidth}px; height: ${cardWidth}px;">
+          <div class="text-3xl sm:text-4xl mt-0.5 drop-shadow-sm">${item.icon}</div>
           <div class="my-auto">
-            <h4 class="font-kanit font-black text-2xl sm:text-3xl text-slate-800 leading-tight whitespace-nowrap tracking-wide">${item.title}</h4>
-            <p class="text-xs sm:text-sm font-extrabold text-slate-500 mt-1">(${item.subtitle})</p>
+            <h4 class="font-kanit font-black text-xl sm:text-2xl text-slate-800 leading-tight whitespace-nowrap tracking-wide">${item.title}</h4>
+            <p class="text-xs font-extrabold text-slate-500 mt-0.5">(${item.subtitle})</p>
           </div>
-          <div class="${item.bgColor} text-white text-xs sm:text-sm font-black py-1.5 px-3 rounded-xl border border-black/10 shadow-sm">
+          <div class="w-full ${item.bgColor} text-white text-[10px] sm:text-xs font-black py-1 px-2 rounded-xl border border-black/10 shadow-sm whitespace-nowrap">
             คำไทย 7 ชนิด
           </div>
         </div>
@@ -484,7 +483,6 @@
       document.getElementById('welcomeScreen').classList.add('hidden');
       document.getElementById('gameScreen').classList.remove('hidden');
       
-      // Request animation frame ensures DOM layout render before calculating offsetWidth
       requestAnimationFrame(() => {
         resetTrackToBaseline();
       });
@@ -545,7 +543,7 @@
       isSpinning = true;
       document.getElementById('gameStatusText').innerHTML = '⏳ กำลังหมุนด้วยความเร็วสูง...';
 
-      const randomCardOffset = (Math.random() - 0.5) * (cardWidth * 0.5);
+      const randomCardOffset = (Math.random() - 0.5) * (cardWidth * 0.4);
       const targetX = (viewportWidth / 2) - (targetWinnerIndex * step + cardWidth / 2 + randomCardOffset);
 
       const startX = currentX;
